@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "SupportProdPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Extended Support/Warranty
+        @*<small>Product</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a>@Html.ActionLink("Home", "Index", "Home")</a>
+        </li>
+        <li class="breadcrumb-item active">Extended Support</li>
+    </ol>
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        <div class="col-md-7">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/support_prod.jpg") alt="Extended Support/Warranty">
+            <h3>
+                @Html.ActionLink("Buy Extended Support", "PricingPage", "Home", new { @class = "my-4 btn btn-primary btn-block" })
+            </h3>
+        </div>
+        <div class="col-md-5">
+            <h3 class="my-3">Overview</h3>
+            <p style="text-align:justify">
+                The extended support/warranty package brings to you the services of our highly dedicated support team. It also adds an extended warranty to the devices that you are buying it for.
+            </p>
+            @*<h3 class="my-3">Specifications</h3>
+            <ul>
+                <li>Capture distance - 4.7 cm - 5.3 cm (1.8 inches -2.1 inches) from the image sensor</li>
+                <li>Image format - ISO Standard 19794-6 (2005 & 2011), (640 x 480 Pixels, 8 bit Grayscale), full support of K1, K2, K3, K7</li>
+                <li>Sensor resolution - VGA</li>
+                <li>Dimensions - 51.2mm x 92.6mm x 15.1mm (2 inches x 3.6 inches x 0.59 inch)</li>
+            </ul>*@
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Related Projects Row -->
+    @*<h3 class="my-4">Related Projects</h3>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+        </div>*@
+    <!-- /.row -->
+</div>
+<!-- /.container -->

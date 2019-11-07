@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        About
+        @*<small>ACPL</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a>
+                @Html.ActionLink("Home", "Index", "Home")
+            </a>
+        </li>
+        <li class="breadcrumb-item active">About</li>
+    </ol>
+    <!-- Intro Content -->
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="img-fluid rounded mb-4" src=@Url.Content("~/Content/images/fingerprint750x450_1.jpg") alt="About Img 750 x 450">
+        </div>
+        <div id ="style-3" class="col-lg-6" style="height:325px; overflow-y:scroll">
+            <h2>Access Computech Pvt. Ltd.</h2>
+            <p style="text-align:justify">Founded in August 1994 with the aim of providing customised and innovative solutions for Personlised Identification Systems by using friendly and reliable technology. We are one of the leading solution providers for attendance recording, access control, contract labour management, canteen systems, visitor manangement and other host of allied services.</p>
+            <p style="text-align:justify">We have a state of the art complex for product design, manufacture, testing and deployment, a team of dedicated software and hardware developers to meet the diverse needs for any industry.</p>
+            <p style="text-align:justify">We integrate and provide solution for various reading technologies including, Biometric fingerprint with ISO 19794 - 2 & 4 compliant devices,  Contactless Smart Card with MiFare and ISO 14443 Compliant, RFID proximity, Barcode including 2D, Magnetic, Holorith. Our readers are compatible with various communication technologies like Network TCP/IP supporting TELNET FTP UDP, GPRS quad band modem, Dial up MODEM, and Serial communication.</p>
+            <p style="text-align:justify">We have been providing solutions for various industries - petrochemical, refinery, enterprises, steel,mining, power, instrumentation, electronics, engineering and textile and some of our major clients are TATA STEEL, BHEL, ABB, ALSTOM, IOCL,NMDC, BEL, RIL, ELECON Group, G.S.R.T.C, ASHIMA, ATUL, AMUL.Ord Fac Board, GRASIM, HINDALCO. We operate from various branches across India.</p>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Team Members -->
+    <h2>Our Team</h2>
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <img class="card-img-top" src="http://placehold.it/750x450" alt="Team Member 1">
+                <div class="card-body">
+                    <h4 class="card-title">Team Member</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Position</h6>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#">name@domain.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <img class="card-img-top" src="http://placehold.it/750x450" alt="Team Member 2">
+                <div class="card-body">
+                    <h4 class="card-title">Team Member</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Position</h6>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#">name@domain.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100 text-center">
+                <img class="card-img-top" src="http://placehold.it/750x450" alt="Team Member 3">
+                <div class="card-body">
+                    <h4 class="card-title">Team Member</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Position</h6>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="mailto:name@domain.com">name@domain.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- Our Customers -->
+    <h2>Our Customers</h2>
+    <div class="row">
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/abb_logo.jpg") alt="Client 1">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/bhel_logo.jpg") alt="Client 2">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/alstom_logo.jpg") alt="Client 3">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/iocl_logo.jpg") alt="Client 4">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/bsnl_logo.jpg") alt="Client 5">
+        </div>
+        <div class="col-lg-2 col-sm-4 mb-4">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/tata_logo.png") alt="Client 6">
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->

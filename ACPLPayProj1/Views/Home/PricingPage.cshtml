@@ -1,0 +1,237 @@
+﻿@model ACPLPayProj1.Models.SrNoModel
+
+@{
+    ViewBag.Title = "PricingPage";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<script>
+    document.getElementById("qtyLabel").innerText = '@ViewBag.cartQty';
+
+    function SetHiddenField(id) {
+        $("#prodFlag").val(id);
+        
+        if (id === 1 || id === 2 || id ===  3) {
+            $("#noteTxt").html("Note: Enter only fingerprint device serial numbers");
+        }
+        else if (id === 4 || id === 5) {
+            $("#noteTxt").html("Note: Enter only iris device serial numbers");
+        }
+        else {
+            alert(id);
+            $("#noteTxt").hide();
+        }
+    }
+        //alert($("#prodFlag").val());
+    
+</script>
+
+<script type="text/javascript">
+
+       
+    $(document).ready(function () { 
+
+            
+        $("#SrNumForm").on("submit", function (e) {
+
+                var devType = $("#prodFlag").val().toString();                
+                e.preventDefault();
+                //call external service
+                //var url = "/ACPL_NEW/Home/AddSrNo";
+                var url = "/Home/AddSrNo";
+                var formdata = (window.FormData) ? new FormData(this) : null;
+                var fdata = (formdata !== null) ? formdata : $form.serialize();
+                $("#idNotifSuccess").hide();
+                $("#idNotifError").hide();
+                //get authorization keys.
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: fdata,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log("Success");
+                        $("#idNotifSuccess").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifSuccess").slideUp(500); });
+                        var url = $("#RedirectTo").val();
+                        location.href = url + "?id=" + $("#prodFlag").val().toString();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("Error");                        
+                        if (devType === "1" || devType === "2" || devType === "3") {
+                            $("#idNotifError").html("Only valid <strong>fingerprint</strong> device serial numbers allowed");
+                        }
+
+                        if (devType === "4" || devType === "5") {                            
+                            $("#idNotifError").html("Only valid <strong>iris</strong> device serial numbers allowed");
+                        }
+                        $("#idNotifError").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifError").slideUp(500); });
+
+                    }
+                });
+
+            });
+        });
+    
+
+</script>
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Product
+        <small>Pricing</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @*<a href="index.html">Home</a>*@
+            @Html.ActionLink("Home", "Index", "Home", new { @style = "text-decoration:none" })
+        </li>
+        <li class="breadcrumb-item active">Product</li>
+    </ol>
+    <!-- Content Row -->
+    <div class="row">
+
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header bg-secondary text-white">RD Service-Finger (1 year)</h4>
+                <div class="card-body">
+                    <div class="display-4">₹118.00</div>
+                    <div class="font-italic">per year</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">One Year: ₹ 100.00 + 18% GST : ₹ 118.00</li>
+                    <li class="list-group-item">
+                        Use our STQC certified RD service for 1 year. Use it to enable Aadhaar based authentication and e-KYC in your organisation
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="SetHiddenField(1)">Subscribe now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline-primary h-100">
+                <h4 class="card-header bg-primary text-white">RD Service-Finger (Lifetime)</h4>
+                <div class="card-body">
+                    <div class="display-4">₹354.00</div>
+                    <div class="font-italic">for lifetime</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Lifetime: ₹ 300.00 + 18% GST : ₹ 354.00</li>
+                    <li class="list-group-item">An even better offer that lets you use our RD service for lifetime. Enable seamless integration of Aadhaar authentication and e-KYC services.</li>
+                    @*<li class="list-group-item">Download PDF</li>*@
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="SetHiddenField(2)">Subscribe now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline-primary h-100">
+                <h4 class="card-header bg-secondary text-white">Extended Support/Warranty</h4>
+                <div class="card-body">
+                    <div class="display-4">₹177.00</div>
+                    <div class="font-italic">per year</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">One Year: ₹ 150.00 + 18% GST : ₹ 177.00</li>
+                    <li class="list-group-item">Our extended support package brings you the services of our highly dedicated ACPL support team. Providing tailor made solutions for all your concerns</li>
+
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="SetHiddenField(3)">Subscribe now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header bg-secondary text-white">RD Service - Iris (1 year)</h4>
+                <div class="card-body">
+                    <div class="display-4">₹472.00</div>
+                    <div class="font-italic">per year</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">One Year: ₹ 400.00 + 18% GST : ₹ 472.00</li>
+                    <li class="list-group-item">
+                        Use our STQC certified RD service for 1 year. Use it to enable Aadhaar based authentication and e-KYC in your organisation
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="SetHiddenField(4)">Subscribe now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline-primary h-100">
+                <h4 class="card-header bg-primary text-white">RD Service - Iris (Lifetime)</h4>
+                <div class="card-body">
+                    <div class="display-4">₹1180.00</div>
+                    <div class="font-italic">for lifetime</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Lifetime: ₹ 1000.00 + 18% GST : ₹ 1180.00</li>
+                    <li class="list-group-item">An even better offer that lets you use our RD service for lifetime. Enable seamless integration of Aadhaar authentication and e-KYC services.</li>
+                    @*<li class="list-group-item">Download PDF</li>*@
+                    <li class="list-group-item">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="SetHiddenField(5)">Subscribe now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- The Modal -->
+    <form id="SrNumForm" novalidate>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Enter Device Serial Nos:</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p class="text-info" id="noteTxt"></p>
+                        <input type="text" class="form-control" name="inputSrNum" title="Enter comma separated values" autocomplete="off" pattern="[A-Za-z0-9]+" />
+                        <input id="prodFlag" type="hidden" name="prodFlag"/>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        @* data-dismiss="modal" closes the modal popup on click *@
+                        <button type="submit" class="btn btn-success">Next</button>
+                        @*@Html.ActionLink("Next", "AddSrNo", "Home", new { @class = "btn btn-success" })*@
+                    </div>
+
+
+                    <div id="idNotifError" style="display:none" class="alert alert-danger">Incorrect serial no.</div>
+                    <div id="idNotifSuccess" style="display:none" class="alert alert-success">All looks good!</div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @Html.Hidden("RedirectTo", Url.Action("DeviceSelectPage", "Home"))
+
+
+
+
+</div>
+<!-- /.container -->

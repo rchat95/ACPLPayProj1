@@ -1,0 +1,424 @@
+﻿
+@{
+    ViewBag.Title = "CartPage";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#payOnlineForm").on("submit", function (e) {
+
+            e.preventDefault();            
+
+            //call external service
+            var url = "/Home/Pricing";
+            var formdata = (window.FormData) ? new FormData(this) : null;
+            var fdata = (formdata !== null) ? formdata : $form.serialize();
+
+            //get authorization keys.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: fdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log("Success");
+                    //alert("Success in paying");
+                    var url = $("#RedirectTo").val();
+                    location.href = url;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error");
+                    alert("Error while paying");
+                }
+            });
+
+        });
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    var cartEntrySession = '';
+    var temp;
+    function getSessionValue() {
+        cartEntrySession = '@Session["cartEntry"]';
+
+    }
+
+    function convertData(input) {
+        return input.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g,"'");
+    }
+    var srNum = 0;
+    $(document).ready(function () {
+
+        getSessionValue();
+        //$('#qtyLabel').hide();
+        var getProdType = '@ViewBag.prodType';
+        var getTotalBillAmt = '@ViewBag.getTotalBillAmt';
+        var getQty = '@ViewBag.getQty';
+
+        var temp = convertData(cartEntrySession);
+
+
+        $("#tableBody").html(unescape(temp));
+        calcTotal();
+        calcQty();
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('.delete').click(function () {
+            $(this).parent().parent().remove();
+            calcTotal();
+        });
+    });
+</script>
+
+<br />
+
+<h2 style="text-align:center">Shopping Cart</h2>
+
+<table id="cartTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>
+                <a href="#" style="text-decoration:none; color:black" data-toggle="tooltip" title="Hover over product name to view serial number">Product Name</a>
+            </th>
+            <th>Quantity</th>
+            <th>
+                <a href="#" style="text-decoration:none; color:black" data-toggle="tooltip" title="Cost of product in ₹">Price</a>
+            </th>
+            @*<th>
+                    <a href="#" style="text-decoration:none; color:black" data-toggle="tooltip" title="Delete cart items">Action</a>
+                </th>*@
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<div style="text-align:center; margin-bottom:10px">
+    <strong style="margin-right:10px" id="FM220UQty">FM220U Startek Quantity: @ViewBag.fm220qty</strong>
+    <strong id="IrisQty">Iris Quantity: @ViewBag.irisqty</strong>
+</div>
+
+<div style="text-align:center; margin-bottom:10px">
+    <strong id="totalAmt">Total Amount:</strong>
+</div>
+
+<div style="text-align:center; margin-bottom:10px">    
+    @Html.ActionLink("Back to pricing", "PricingPage", "Home", new { @class = "btn btn-dark"})
+    <button type="button" id="onlinePayBtn" class="btn btn-success" data-toggle="modal" data-target="#onlineModal">Pay Online (PayTM)</button>
+    <button type="button" id="offlinePayBtn" class="btn btn-success" data-toggle="modal" data-target="#offlineModal">Pay Offline</button>
+    @*<button type="submit" id="clearCartBtn" class="btn btn-success">Clear Cart</button>*@
+    @Html.ActionLink("Clear Cart", "ClearCart", "Home", new { @class = "btn btn-danger", @id = "clearCartBtn" })
+</div>
+
+<form id="payOnlineForm">
+    <div class="modal fade" id="onlineModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Pay Online</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Full Name:</label>
+                            <input type="text" class="form-control" name="name" required data-validation-required-message="Please enter your name." autocomplete="off">
+
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Billing Name:</label>
+                            <input type="text" class="form-control" name="billingname" required data-validation-required-message="Please enter billing name." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Phone Number (registered with PayTM):</label>
+                            <input type="tel" class="form-control" pattern="[0-9]{10}" name="phNum" required data-validation-required-message="Please enter your phone number." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="email" required data-validation-required-message="Please enter your email." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Address:</label>
+                            <input type="text" class="form-control" name="address" required data-validation-required-message="Please enter your address." autocomplete="on">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Pincode:</label>
+                            <input type="number" class="form-control" name="pincode" pattern="[0-9]{6}" required data-validation-required-message="Please enter your pincode." autocomplete="on">
+                            <input type="hidden" id="totalqty" name="totalqty" />
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label for="stateSel">State:</label>
+                            <select class="form-control" id="stateSel" name="state" required data-validation-required-message="Please select state">
+
+                                <option>Andaman and Nicobar</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Arunanchal Pradesh</option>
+                                <option>Assam</option>
+                                <option>Bihar</option>
+                                <option>Chandigarh</option>
+                                <option>Chhattisgarh</option>
+                                <option>Dadra and Nagar Haveli</option>
+                                <option>Daman and Diu</option>
+                                <option>Delhi</option>
+                                <option>Goa</option>
+                                <option>Gujarat</option>
+                                <option>Haryana</option>
+                                <option>Himachal Pradesh</option>
+                                <option>Jammu and Kashmir</option>
+                                <option>Jharkhand</option>
+                                <option>Karnataka</option>
+                                <option>Kerala</option>
+                                <option>Lakshadweep</option>
+                                <option>Madhya Pradesh</option>
+                                <option>Maharashtra</option>
+                                <option>Manipur</option>
+                                <option>Meghalaya</option>
+                                <option>Mizoram</option>
+                                <option>Nagaland</option>
+                                <option>Odisha</option>
+                                <option>Puducherry</option>
+                                <option>Punjab</option>
+                                <option>Rajasthan</option>
+                                <option>Sikkim</option>
+                                <option>Tamil Nadu</option>
+                                <option>Telangana</option>
+                                <option>Tripura</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Uttarakhand</option>
+                                <option>West Bengal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>GSTIN <i>(optional)</i>:</label>
+                            <input type="tel" pattern="[A-Z0-9]{15}" class="form-control" name="gstNo" data-validation-required-message="Please enter GST No." autocomplete="off">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    @* data-dismiss="modal" closes the modal popup on click *@
+                    <button type="submit" class="btn btn-success">Pay</button>
+                    @*@Html.ActionLink("Pay", "Pricing", "Home", new { @class = "btn btn-success" })*@
+                    @*@Html.ActionLink("Test Button", "PayTMPage", "Home", new { @class = "btn btn-dark" })*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="totalPayAmt" id="totalPayAmt" />
+    @Html.Hidden("RedirectTo", Url.Action("PayTMPage", "Home"))
+</form>
+
+<form id="payOfflineForm">
+    <div class="modal fade" id="offlineModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Pay Offline</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Full Name:</label>
+                            <input type="text" class="form-control" name="name" required data-validation-required-message="Please enter your name." autocomplete="off">
+
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Phone Number:</label>
+                            <input type="tel" class="form-control" pattern="[0-9]{10}" name="phNum" required data-validation-required-message="Please enter your phone number." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" name="email" required data-validation-required-message="Please enter your email." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Biling Name:</label>
+                            <input type="text" class="form-control" name="billName" required data-validation-required-message="Please enter your billing name" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Address Line 1:</label>
+                            <input type="text" class="form-control" name="Address_1" required data-validation-required-message="Please enter your address" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Address Line 2:</label>
+                            <input type="text" class="form-control" name="Address_2" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label for="stateSel">State:</label>
+                            <select class="form-control" id="stateSel" name="state" required data-validation-required-message="Please select state">
+
+                                <option>Andaman and Nicobar</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Arunanchal Pradesh</option>
+                                <option>Assam</option>
+                                <option>Bihar</option>
+                                <option>Chandigarh</option>
+                                <option>Chhattisgarh</option>
+                                <option>Dadra and Nagar Haveli</option>
+                                <option>Daman and Diu</option>
+                                <option>Delhi</option>
+                                <option>Goa</option>
+                                <option>Gujarat</option>
+                                <option>Haryana</option>
+                                <option>Himachal Pradesh</option>
+                                <option>Jammu and Kashmir</option>
+                                <option>Jharkhand</option>
+                                <option>Karnataka</option>
+                                <option>Kerala</option>
+                                <option>Lakshadweep</option>
+                                <option>Madhya Pradesh</option>
+                                <option>Maharashtra</option>
+                                <option>Manipur</option>
+                                <option>Meghalaya</option>
+                                <option>Mizoram</option>
+                                <option>Nagaland</option>
+                                <option>Odisha</option>
+                                <option>Puducherry</option>
+                                <option>Punjab</option>
+                                <option>Rajasthan</option>
+                                <option>Sikkim</option>
+                                <option>Tamil Nadu</option>
+                                <option>Telangana</option>
+                                <option>Tripura</option>
+                                <option>Uttar Pradesh</option>
+                                <option>Uttarakhand</option>
+                                <option>West Bengal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Pin code:</label>
+                            <input type="tel" pattern="[0-9]{6}" class="form-control" required name="pinCode" data-validation-required-message="Please enter pin code" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>GST No.:</label>
+                            <input type="tel" pattern="[A-Z0-9]{15}" class="form-control" name="gstNo" data-validation-required-message="Please enter GST No." autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Remarks:</label>
+                            <input type="text" class="form-control" name="remarks" autocomplete="off">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    @* data-dismiss="modal" closes the modal popup on click *@
+                    <button type="submit" class="btn btn-success">Pay</button>
+                    @*@Html.ActionLink("Pay", "Pricing", "Home", new { @class = "btn btn-success" })*@
+                </div>
+
+
+                <div id="idNotifError" style="display:none" class="alert alert-danger">Error</div>
+                <div id="idNotifSuccess" style="display:none" class="alert alert-success">Success</div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script language="javascript" type="text/javascript">
+
+    function calcTotal() {
+        var tds = document.getElementById('cartTable').getElementsByTagName('td');
+        var sum = 0;       
+        for (var i = 0; i < tds.length; i++) {
+            if (tds[i].id === 'fieldCell') {
+                sum += isNaN(tds[i].innerHTML.substring(1)) ? 0 : parseInt(tds[i].innerHTML.substring(1));
+            }            
+        }
+       
+        document.getElementById('totalAmt').innerHTML = 'Total Amount: ₹' + sum;
+
+        $("#totalPayAmt").val(sum);
+        if (sum == 0) {
+            $("#onlinePayBtn").prop('disabled', true);
+            $("#offlinePayBtn").prop('disabled', true);
+            $("#clearCartBtn").addClass("disabled");
+        }
+    }
+
+    function calcQty() {
+        var tds = document.getElementById('cartTable').getElementsByTagName('td');
+        var qty = 0;
+        for (var i = 0; i < tds.length; i++) {
+            if (tds[i].id === 'qtyCell') {
+                qty += isNaN(tds[i].innerHTML.substring(0)) ? 0 : parseInt(tds[i].innerHTML.substring(0));
+
+            }
+        }       
+
+        $("#totalqty").val(qty);       
+
+        document.getElementById('totalqty').innerHTML = qty;
+    }
+
+</script>
+
+

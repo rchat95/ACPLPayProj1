@@ -1,0 +1,381 @@
+﻿
+@{
+    ViewBag.Title = "DeviceSelectPage";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#paymentForm").on("submit", function (e) {
+            
+            var qtyText = $("#deviceQty").text();
+            var colonIndex = qtyText.indexOf(':');
+            colonIndex += 2;
+            qtyText = qtyText.substring(colonIndex);
+            $("#prodQty").val(qtyText);
+            if ($("#addSupportChkbox").prop("checked") == true) {
+                
+                $("#warrantyFlag").val("Y");
+            }
+            else {
+               
+                $("#warrantyFlag").val("N");
+            }
+            getSrNum();
+
+            e.preventDefault();
+            //call external service
+            var url = "/Home/AddToCart";
+            var formdata = (window.FormData) ? new FormData(this) : null;
+            var fdata = (formdata !== null) ? formdata : $form.serialize();
+            
+            //get authorization keys.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: fdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log("Success");
+                    
+                    var url = $("#RedirectToCart").val();
+                    location.href = url + "?id=1";
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error");
+                    //alert("Error while adding to cart");
+                    $("#idNotifError").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifError").slideUp(500); });
+                }
+            });
+
+        });
+    });
+
+
+</script>
+
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        RD Service
+        <small id="prodType">Subscription</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", "Home")">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("PricingPage", "Home")">Pricing Page</a>
+        </li>
+        <li class="breadcrumb-item active">Subscription page</li>
+    </ol>
+
+    <form id="paymentForm" novalidate>
+        <div class="mb-4" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h5 class="mb-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Valid Devices</a>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div id="style-3" class="card-body" style="height:120px; overflow-y:scroll">
+
+
+                        <div id="ValidDevContent" class="row">
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Active Devices</a>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div id="style-3" class="card-body" style="height:120px; overflow-y:scroll">
+                        <div id="ActiveDevContent" class="row">
+
+                        </div>
+                        @*<div class="row">
+                        <div class="col-md-3">
+                            <button type="button" id="addActiveBtn" onclick="modifyQty(); return false;" class="btn btn-primary btn-sm">Add Selected Active Devices</button>
+                        </div>
+                    </div>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" role="tab" id="headingFour">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">No renewal required</a>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div id="style-3" class="card-body" style="height:120px; overflow-y:scroll">
+                        <div id="LifeDevContent" class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Invalid Devices
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div id="style-3" class="card-body" style="height:120px; overflow-y:scroll">
+                        <div id="InvalidDevContent" class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header" role="tab" id="headingFive">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Blocked Devices</a>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div id="style-3" class="card-body" style="height:120px; overflow-y:scroll">
+                        <div id="BlockedDevContent" class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <label id="deviceQty">Total quantity: 0 </label> <strong><label class="text-danger" id="addSupportLabel"><input id="addSupportChkbox" style="margin-left:5px" type="checkbox" value="" onclick="addSupport()" />Add Extended Support</label></strong>
+            <br />
+            <strong>
+                <label id="totalAmt">Total amount: ₹0 </label>
+            </strong>
+
+            <br />
+
+            <div id="idNotifError" style="display:none" class="alert alert-danger">Duplicate serial number! Device already added to cart</div>
+
+            @Html.ActionLink("Back to pricing", "PricingPage", "Home", new { @class = "btn btn-dark" })
+            <button type="submit" class="btn btn-success" id="addToCartBtn">Add to cart</button>
+            @*<button type="button" class="btn btn-primary" onclick="getSrNum()">Test SrNo</button>*@
+            @*@Html.ActionLink("Add to cart", "AddToCart", "Home", new { @class = "btn btn-dark", @id = "addToCartBtn" })*@
+            @*@Html.ActionLink("Proceed to checkout", "TestPaytm", "Home", new { @class = "btn btn-success", @id = "checkoutBtn" })*@
+            <input type="hidden" name="prodQty" id="prodQty" />
+            <input type="hidden" name="totalBillAmt" id="totalBillAmt" />
+            <input type="hidden" name="SNumClientStr" id="SNumClientStr" />
+            <input type="hidden" name="warrantyFlag" id="warrantyFlag"/>
+
+        </div>
+    </form>
+
+    @Html.Hidden("RedirectToCart", Url.Action("CartPage", "Home"))
+    @Html.Hidden("RedirectTo", Url.Action("PaymentResp", "Home"))
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript">
+    
+    var activeQty = 0;
+    document.getElementById("qtyLabel").innerText = '@ViewBag.cartQty';
+    document.getElementById("prodType").innerText = '@ViewBag.prodType' + " Subscription";
+
+    var prodCat = '@ViewBag.prodCat';
+    
+    if (prodCat != 1 && prodCat != 2) {        
+        $("#addSupportLabel").hide();
+    }
+    var colonIndex;
+
+    var getValidMsg = '@ViewBag.validMessage';
+    var getActiveMsg = '@ViewBag.activeMessage';
+    var getLifeTimeMsg = '@ViewBag.lifetimeMessage';
+    var getInvalidMsg = '@ViewBag.invalidMessage';
+    var getBlockedMSg = '@ViewBag.blockDevStr';
+    var srNumStr = "";
+
+    var priceMultiplier = '@ViewBag.priceVal';
+
+    if (getValidMsg == "") {
+        document.getElementById("ValidDevContent").innerHTML = '<div class="col-md-3">' + 'No valid device found' + '</div>';
+    }
+    else
+    {
+        //Got valid devices
+        var vld_srnos = getValidMsg.split(',');
+            for (var i = 0; i < vld_srnos.length; i++) {
+                colonIndex = vld_srnos[i].indexOf(':');
+                vld_srnos[i] = vld_srnos[i].substring(0, colonIndex);
+                srNumStr += vld_srnos[i] + ",";
+                document.getElementById("ValidDevContent").innerHTML += '<div class="col-md-3">' + vld_srnos[i] + '</div>';
+            }
+    }
+
+    if (getActiveMsg == "") {
+        document.getElementById("ActiveDevContent").innerHTML = '<div class="col-md-3">' + 'No valid device found' + '</div>';
+        $("#addActiveBtn").prop("disabled", true);
+    }
+    else {
+            $("#collapseThree").removeClass("collapse").addClass("collapse show");
+            var active_srnos = getActiveMsg.split(',');
+            for (var i = 0; i < active_srnos.length; i++) {
+
+                colonIndex = active_srnos[i].indexOf(':');
+
+                if (colonIndex == -1) {                    
+                    document.getElementById("ActiveDevContent").innerHTML += '<div class="col-md-3"><div class="checkbox"><label><input type="checkbox" value="' + active_srnos[i] + '" onclick="modifyQty()">' + active_srnos[i] + '</label></div></div>';
+                }
+                else {
+                    active_srnos[i] = active_srnos[i].substring(0, colonIndex);                    
+                    document.getElementById("ActiveDevContent").innerHTML += '<div class="col-md-3"><div class="checkbox"><label><input type="checkbox" value="' + active_srnos[i] + '" onclick="modifyQty()">' + active_srnos[i] +  '</label></div></div>';
+                }
+            }
+        }
+
+    if (getLifeTimeMsg == "") {
+        document.getElementById("LifeDevContent").innerHTML = '<div class="col-md-3">' + 'No valid device found' + '</div>';
+    }
+    else {
+            $("#collapseFour").removeClass("collapse").addClass("collapse show");
+            var life_srnos = getLifeTimeMsg.split(',');
+            for (var i = 0; i < life_srnos.length; i++) {
+
+                colonIndex = life_srnos[i].indexOf(':');
+
+                if (colonIndex == -1) {
+                    document.getElementById("LifeDevContent").innerHTML += '<div class="col-md-3">' + life_srnos[i] + '</div>';
+                }
+                else
+                {
+                    life_srnos[i] = life_srnos[i].substring(0, colonIndex);
+                    document.getElementById("LifeDevContent").innerHTML += '<div class="col-md-3">' + life_srnos[i] + '</div>';
+                }
+            }
+        }
+
+    if (getInvalidMsg == "") {
+        document.getElementById("InvalidDevContent").innerHTML = '<div class="col-md-3">' + 'No valid device found' + '</div>';
+    }   
+    else {
+            $("#collapseTwo").removeClass("collapse").addClass("collapse show");
+            var invalid_srnos = getInvalidMsg.split(',');
+            for (var i = 0; i < invalid_srnos.length; i++) {
+                colonIndex = invalid_srnos[i].indexOf(':');
+                if (colonIndex == -1) {
+                    document.getElementById("InvalidDevContent").innerHTML += '<div class="col-md-3">' + invalid_srnos[i] + '</div>';
+                }
+                else
+                {
+                    invalid_srnos[i] = invalid_srnos[i].substring(0, colonIndex);
+                    document.getElementById("InvalidDevContent").innerHTML += '<div class="col-md-3">' + invalid_srnos[i] + '</div>';
+                }
+            }
+        }
+
+    if (getBlockedMSg == "") {
+        document.getElementById("BlockedDevContent").innerHTML = '<div class="col-md-3">' + 'No valid device found' + '</div>';
+    }
+    else {
+            $("#collapseFive").removeClass("collapse").addClass("collapse show");
+            var blocked_srnos = getBlockedMSg.split(',');
+            for (var i = 0; i < blocked_srnos.length; i++) {
+                colonIndex = blocked_srnos[i].indexOf(':');
+                if (colonIndex == -1) {
+                    document.getElementById("BlockedDevContent").innerHTML += '<div class="col-md-3">' + blocked_srnos[i] + '</div>';
+                }
+                else {
+                    blocked_srnos[i] = blocked_srnos[i].substring(0, colonIndex);
+                    document.getElementById("BlockedDevContent").innerHTML += '<div class="col-md-3">' + blocked_srnos[i] + '</div>';
+                }
+            }
+        }
+
+    if ((vld_srnos == null || vld_srnos.length == 0) && (active_srnos == null || active_srnos.length == 0)) {            
+        document.getElementById("deviceQty").innerHTML = "Total quantity: " + 0;
+        document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + 0;
+        document.getElementById("totalBillAmt").setAttribute('value', 0);
+        $("#addToCartBtn").prop('disabled', true);            
+        $("#checkoutBtn").addClass("disabled");
+        $("#addSupportLabel").addClass("text-muted");
+        $("#addSupportChkbox").prop('disabled', true);
+
+    }
+
+    document.getElementById("deviceQty").innerHTML = "Total quantity: " + vld_srnos.length;
+    document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + vld_srnos.length * priceMultiplier;
+    document.getElementById("totalBillAmt").setAttribute('value', vld_srnos.length * priceMultiplier);
+
+    //getSrNum();
+
+    function modifyQty() {            
+
+        activeQty = 0;
+
+        $("#ActiveDevContent").find("input:checked").each(function (i, ob) {
+            activeQty++;
+        });
+
+        if (vld_srnos != null) {
+            document.getElementById("deviceQty").innerHTML = "Total quantity: " + (vld_srnos.length + activeQty);
+            document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + (vld_srnos.length + activeQty) * priceMultiplier;
+            document.getElementById("totalBillAmt").setAttribute('value', (vld_srnos.length + activeQty) * priceMultiplier);
+            $("#addSupportChkbox").prop('checked', false);
+        }
+        else {
+            document.getElementById("deviceQty").innerHTML = "Total quantity: " + (activeQty);
+            document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + (activeQty) * priceMultiplier;
+            document.getElementById("totalBillAmt").setAttribute('value', (activeQty) * priceMultiplier);
+            $("#addSupportChkbox").prop('checked', false);
+        }
+
+        
+        //alert("Selected active devices added. Please check total quantity and amount");
+
+    }
+
+    function addSupport() {
+        if ($("#addSupportChkbox").prop("checked") === true) {
+            document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + ((vld_srnos.length + activeQty) * priceMultiplier + (vld_srnos.length + activeQty) * 177);
+            document.getElementById("totalBillAmt").setAttribute('value', (vld_srnos.length + activeQty) * priceMultiplier + (vld_srnos.length + activeQty) * 177);
+        }
+        else {
+            document.getElementById("totalAmt").innerHTML = "Total amount: ₹" + ((vld_srnos.length + activeQty) * priceMultiplier);
+            document.getElementById("totalBillAmt").setAttribute('value', (vld_srnos.length + activeQty) * priceMultiplier);
+        }
+    }
+
+    function getSrNum() {
+        //ADD VALID SRNUMS ANYWAY AND ADD SELECTED ACTIVE. THAT'S ALL. SRNUM 
+        $("#ActiveDevContent").find("input:checked").each(function (i, ob) {
+            
+            srNumStr += $(ob).val() + ",";
+            
+        });
+        
+        $("#SNumClientStr").val(srNumStr);
+
+    }
+
+</script>

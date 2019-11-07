@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "RDSProdPage";
+    
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        RD Service
+
+        <small>
+            Product
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @*<a href="index.html">Home</a>*@
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+        <li class="breadcrumb-item active">RD Service</li>
+    </ol>
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        <div class="col-md-7">
+            <img class="img-fluid" src=@Url.Content("~/Content/images/rds_sample2.jpg") alt="RD Service">
+            <h3>
+                @*Add to cart*@
+                @Html.ActionLink("Buy RD Service", "PricingPage","Home", new { @class = "my-4 btn btn-primary btn-block" })
+            </h3>
+        </div>
+        <div class="col-md-5">
+            <h3 class="my-3">
+                @*Project Description*@
+                Overview
+            </h3>
+            <p style="text-align:justify">
+                Our RD service can be easily integrated with biometric devices.
+                It provides a platform for performing auth and e-KYC as per UIDAI standards.
+                Supports all three authentication factors - finger, iris and face.
+            </p>
+            <h3 class="my-3">
+                @*Project Details*@
+                Specifications
+            </h3>
+            <ul>
+                <li>Built as per the latest Auth 2.5 spec</li>
+                <li>STQC (UIDAI) certified</li>
+                <li>Face auth added</li>
+                <li>Windows, Linux and Android compatible</li>
+            </ul>
+            
+        </div>
+    </div>
+    <!-- /.row -->
+
+    
+
+    <!-- Related Projects Row -->
+    @*<h3 class="my-4">Related Projects</h3>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+    </div>*@
+    <!-- /.row -->
+</div>
+<!-- /.container -->

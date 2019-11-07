@@ -1,0 +1,145 @@
+﻿@model ACPLPayProj1.Models.MailModels
+
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#contactForm").on("submit", function (e) {
+            e.preventDefault();
+            //call external service
+            var url = "/Home/SendNewMessage";
+            var formdata = (window.FormData) ? new FormData(this) : null;
+            var fdata = (formdata !== null) ? formdata : $form.serialize();
+            $("#idSubmitMvt").attr("disabled", true);
+
+            $("#idNotifSuccess").hide();
+            $("#idNotifError").hide();
+            //get authorization keys.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: fdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    $("#idNotifSuccess").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifSuccess").slideUp(500); });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Error");
+                    $("#idNotifError").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifError").slideUp(500); });
+                }
+            });
+
+        });
+    });
+
+</script>
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Contact
+        <small>ACPL Support</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a>
+                @Html.ActionLink("Home","Index","Home")
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Contact</li>
+    </ol>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Map Column -->
+        <div class="col-lg-8 mb-4">
+            <!-- Embedded Google Map -->
+            <!--<iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.704497425758!2d73.18362231480909!3d22.251287985349077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc42b19fae935%3A0xaa48e46b47d86b0b!2sAccess+Computech+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1533625719400"></iframe>-->
+            <iframe width="100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.704497425758!2d73.18362231480909!3d22.251287985349077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc42b19fae935%3A0xaa48e46b47d86b0b!2sAccess+Computech+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1533625719400" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+        <!-- Contact Details Column -->
+        <div class="col-lg-4 mb-4">
+            <h3>Contact Details</h3>
+            <p>
+                504 / 6 G.I.D.C Industrial Estate
+                <br>Makarpura, Vadodara
+                <br>Gujarat - 390010, India
+            </p>
+            <p>
+                <abbr title="Phone">P</abbr>: 7874078565, 8141958565
+            </p>
+            <p>
+                <abbr title="Email">E</abbr>:
+                <a href="mailto:support@acpl.ind.in">
+                    support@acpl.ind.in
+                </a>
+            </p>
+            <p>
+                <abbr title="Hours">H</abbr>: Monday - Saturday: 9:30 AM to 6:00 PM
+            </p>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr />
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <p>
+                We are based in Vadodara and our branches are spread across various locations throughout the country. Check out our branches section for details.
+            </p>
+        </div>
+        <div class="col-md-4">
+            
+            @Html.ActionLink("Our Branches", "Branches", "Home", new { @class = "btn btn-lg btn-secondary btn-block" })
+            
+        </div>
+    </div>
+    <!-- Contact Form -->    
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <h3>Send us a Message</h3>
+            <form name="sentMessage" id="contactForm">
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Full Name:</label>
+                        <input type="text" class="form-control"  name="name" required data-validation-required-message="Please enter your name." autocomplete="off">                      
+
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Subject:</label>
+                        <input type="text" class="form-control"  name="subject" data-validation-required-message="Please enter your phone number." autocomplete="off">
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Email Address:</label>
+                        <input type="email" class="form-control"  name="to" required data-validation-required-message="Please enter your email address." autocomplete="off">
+                    </div>
+                </div>
+                <div class="control-group form-group">
+                    <div class="controls">
+                        <label>Message:</label>
+                        <textarea rows="10" cols="100" class="form-control" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                    </div>
+                </div>
+                <div id="success"></div>
+                <!-- For success/fail messages -->
+
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
+                <br /> <br />
+                <div id="idNotifError" style="display:none" class="alert alert-danger">Fail to send a message</div>
+                <div id="idNotifSuccess" style="display:none" class="alert alert-success">Message is sent</div>
+            </form>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->

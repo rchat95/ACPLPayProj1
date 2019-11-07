@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "Branches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Our Branches
+        @*<small>Subheading</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a>
+                @Html.ActionLink("Home", "Index", "Home")
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a>
+                @Html.ActionLink("Contact", "Contact", "Home")
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Our Branches</li>
+    </ol>
+    <!--Branch 1-->
+    <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/gujarat_monument_1.jpg") alt="Ahmedabad"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Ahmedabad</a>
+                    </h4>
+                    <p class="card-text">
+                        Access Computech Pvt Ltd.<br />
+                        U/4, Sarthak Tower, Ramdevnagar Road<br />
+                        Opp. Courtyard Marriott Hotel, Ramdevnagar<br />
+                        Ahmedabad -380015<br />
+                        @*<i>
+                            Mob: 093283 39565<br />
+                            Contact Person: Mr.Jignesh Kudecha<br />
+                            E Mail: amd@acpl.ind.in
+                        </i>*@
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 2-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/NewDelhi.jpg")  alt="New Delhi"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">New Delhi</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        502, Dakha House, 18/17 WEA Karol Bagh, Pusa Lane<br />
+                        New Delhi – 110005
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 3-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/up_lucknow.jpeg") alt="Kanpur, Uttar Pradesh"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Kanpur</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        C/O R. K. Maurya, Plot no: 6, K. R. Puram<br />
+                        Nr. K.R. Education Centre, Sanigawa Road<br />
+                        Kanpur, Uttar Pradesh - 208021
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 4-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/up_taj.jpg") alt="Shahjahanpur, Uttar Pradesh"></a>                                
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Shahjahanpur</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        C/O Ankit Saxena, 24, Hussainpura<br />
+                        Nr. Putani Ki Chakki<br />
+                        Shahjahanpur, Uttar Pradesh - 242 001
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 5-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/kolkata_1.jpg") alt="Kolkata"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Kolkata</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        Flat No. 902, Tower: K-23<br />
+                        Shapoorji Shukhobristi Newtown<br />
+                        Kolkata, West Bengal - 700156
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 6-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/jamshedpur_deoghar.jpg") alt="Jamshedpur"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Jamshedpur</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        78, New Bardawari, Sakchi, Jamshedpur<br />
+                        District: East Singhbhum<br />
+                        Jharkhand - 831001
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 7-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/bangalore.jpg") alt="Bangalore"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Bangalore</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        Resident Engineer, Bengaluru, Karnataka
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 8-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/tamilnadu.jpg") alt="Tamil Nadu"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Tamil Nadu</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        4/468,Balaji nagar<br />
+                        Main street,Kattur,<br />
+                        Trichy, Tamil Nadu - 620019
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--Branch 9-->
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src=@Url.Content("~/Content/images/Mumbai.jpg") alt=""></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Mumbai</a>
+                    </h4>
+                    <p class="card-text">
+                        M/s Access Computech Pvt. Ltd.<br />
+                        No 8, Grd. Floor. Gandhi Bhuvan<br />
+                        Chunam Lane, Lamington Road,<br />
+                        Mumbai, Maharashtra - 400007
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Pagination -->
+    @*<ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>*@
+</div>
+<!-- /.container -->

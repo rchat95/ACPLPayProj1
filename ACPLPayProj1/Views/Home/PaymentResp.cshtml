@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "PaymentResp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<h2 style="text-align:center">@ViewBag.Message</h2>
+<img id="successImg" width="40" height="40" src="~/Content/images/tick-512.png" />
+<img id="errorImg" width="40" height="40" src="~/Content/images/cross.png"/>
+<h2 id="totalAmt" style="text-align:center">@ViewBag.totalAmt</h2>
+
+
+<table id="payTable" style="display:none" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>            
+            <th>Order ID</th>
+            <th>Transaction ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="name">Rongon Chatterjee</td>
+            <td id="email">rongon95@gmail.com</td>
+            <td id="orderID"></td>
+            <td id="txnNum"></td>
+        </tr>        
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idNotifSuccess").hide();
+        $("#idNotifError").hide();
+        $("#payTable").hide();
+        $("#successImg").hide();
+        $("#errorImg").hide();
+        $("#totalAmt").hide();
+        var getMsg = '@ViewBag.Message';
+        var payTxn = '@ViewBag.txnNum';
+        var orderID = '@ViewBag.orderID';
+        var custName = '@ViewBag.custName';
+        var custEmail = '@ViewBag.email';
+        
+        if (getMsg === "Payment Successful") {
+
+            $("#txnNum").html(payTxn);
+            $("#orderID").html(orderID);
+            $("#email").html(custEmail);
+            $("#name").html(custName);
+            $("#payTable").show();
+            $("#successImg").show();
+            $("#totalAmt").show();
+            //$("#idNotifSuccess").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifSuccess").slideUp(500); });
+        }
+        else
+        {            
+            $("#txnNum").html('NA');
+            $("#orderID").html('NA');
+            $("#email").html('NA');
+            $("#name").html('NA');
+            $("#errorImg").show();
+            //$("#idNotifError").fadeTo(2000, 500).slideUp(500, function () { $("#idNotifError").slideUp(500); });
+        }
+    });
+</script>
+

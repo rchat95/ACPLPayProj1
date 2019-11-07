@@ -1,0 +1,65 @@
+﻿
+@{
+                /**/
+
+                /**/
+
+                Layout = null;
+}
+
+<script src=@Url.Content("~/Content/vendor/jquery/jquery.min.js")></script>
+<script src=@Url.Content("~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js")></script>
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    var temp = $("#email").val();
+    //    alert(temp);
+    //});
+
+</script>
+
+<html>
+<head>
+    <title>Merchant Check Out Page</title>
+</head>
+<body>
+    <center>
+        <h1>Please do not refresh this page...</h1>
+    </center>
+    <form method="post" action='@ViewBag.Message7' name="f1">
+        <table border="1">
+            <tbody id="inputBody">
+                @* Append keys here *@
+                <input type="hidden" id="MID" name="MID" value="RCPayS81099062107132" />
+                <input type="hidden" id="CHANNEL_ID" name="CHANNEL_ID" value="WEB" />
+                <input type="hidden" id="INDUSTRY_TYPE_ID" name="INDUSTRY_TYPE_ID" value="Retail" />
+                <input type="hidden" id="WEBSITE" name="WEBSITE" value="WEBSTAGING" />
+                <input type="hidden" id="email" name="EMAIL" value='@ViewBag.Message1' />
+                <input type="hidden" id="MOBILE_NO" name="MOBILE_NO" value="@ViewBag.Message2" />
+                <input type="hidden" id="CUST_ID" name="CUST_ID" value="@ViewBag.Message3" />
+                <input type="hidden" id="ORDER_ID" name="ORDER_ID" value="@ViewBag.Message4" />
+                <input type="hidden" id="TXN_AMOUNT" name="TXN_AMOUNT" value="@ViewBag.Message5" />
+                <input type="hidden" id="CALLBACK_URL" name="CALLBACK_URL" value="http://localhost:8153/Home/PaymentResp" />
+                <input type="hidden" id="CHECKSUMHASH" name="CHECKSUMHASH" value='@ViewBag.Message6' />
+            </tbody>
+        </table>
+
+        <script type="text/javascript">
+            document.f1.submit();
+            //alert($("#MID").val());
+            //alert($("#CHANNEL_ID").val());
+            //alert($("#INDUSTRY_TYPE_ID").val());
+            //alert($("#WEBSITE").val());
+            //alert($("#email").val());
+            //alert($("#MOBILE_NO").val());
+            //alert($("#CUST_ID").val());
+            //alert($("#ORDER_ID").val());
+            //alert($("#TXN_AMOUNT").val());
+            //alert($("#CALLBACK_URL").val());
+            //alert($("#CHECKSUMHASH").val());
+
+            
+        </script>
+    </form>
+</body>
+</html>

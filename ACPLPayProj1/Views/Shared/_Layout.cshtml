@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACPL | RD Service</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ACPL | RD Service</title>
+    <!-- Bootstrap core CSS -->
+    <link href=@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css") rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href=@Url.Content("~/Content/css/modern-business.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/css/myScroll.css") rel="stylesheet">
+    <link href=@Url.Content("~/Content/css/animate.css") rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
+
+    @* Site favicon *@
+    <link rel="title icon" href="@Url.Content("~/Content/images/acpl_reg_logo.jpg")" />
+
+    <script src=@Url.Content("~/Content/vendor/jquery/jquery.min.js")></script>
+    <script src=@Url.Content("~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js")></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    
+
+</head>
+<body id="style-3">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+    
+    <div class="container body-content">
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+            @*<div>
+                <a class="navbar-brand">
+                    <img src=@Url.Content("~/Content/images/acpl_logo.png") width="60" height="40" alt="ACPL Logo">
+                </a>
+            </div>*@
+            <div class="container">
+                
+                <a class="navbar-brand">
+                    <img src=@Url.Content("~/Content/images/acpl_reg_logo.jpg") alt="ACPL Logo" width="40" height="40">
+                </a>           
+                               
+                @Html.ActionLink("Access Computech Pvt. Ltd.", "Index", "Home", new { @class = "navbar-brand"})
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a>
+                                @*About*@
+                                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a>
+                                @*About*@
+                                @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a>
+                                @*Contact*@
+                                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Products
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+
+                                @Html.ActionLink("FM220U", "FM220UProdPage", "Home", new { @class = "dropdown-item" })
+                                @Html.ActionLink("Aadhaar RD Service", "RDSProdPage", "Home", new { @class = "dropdown-item" })
+                                @Html.ActionLink("IriShield MK-2120U", "IrisProdPage", "Home", new { @class = "dropdown-item" })
+                                @*<a class="dropdown-item" href=@Url.Content("~/Content/portfolio-2-col.html")>Vigil Series</a>
+                                <a class="dropdown-item" href=@Url.Content("~/Content/portfolio-3-col.html")>Sentinel Series</a>
+                                <a class="dropdown-item" href=@Url.Content("~/Content/portfolio-4-col.html")>Specific function products</a>
+                                <a class="dropdown-item" href=@Url.Content("~/Content/portfolio-item.html")>Accessories</a>*@
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Downloads
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/RDService_Error_Details.pdf")">RD Service Response Error Code Manual</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/ACPL FM220 RD Document(FOR DEVELOPER).pdf")">Android RD Service Programmer Manual</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/ACPL_RD_WIN_PROGRAMMER_MANUAL.pdf")">Windows RD Service Programmer Manual</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/RD_SERVICE_INTEGRATION _WITH_FACE_AUTHENTICATION.pdf")">Face Integration Manual (Android/Windows)</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/ACPL_FM220_RD_Document_ANDROID.pdf")">Android RD Service User Manual</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/Android_HTTPS_Certificate_Setup.pdf")">Manual to install certificate for RD service HTTPS web call setup in Android</a>
+                                <a class="dropdown-item" href="@Url.Content("~/Content/manuals/WINDOWS_RD_SERVICE_INSTALLATION_GUIDE.pdf")">Installation guide for RD Service - Windows platform</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Quick Links
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                                @*<a class="dropdown-item" href=@Url.Content("~/Content/full-width.html")>Full Width Page</a>
+        <a class="dropdown-item" href=@Url.Content("~/Content/sidebar.html")>Sidebar Page</a>
+        <a class="dropdown-item" href=@Url.Content("~/Content/faq.html")>FAQ</a>
+        <a class="dropdown-item" href=@Url.Content("~/Content/404.html")>404</a>*@
+                                <a class="dropdown-item" href=@Url.Content("~/Content/pricing.html")>Pricing Table</a>
+                                @*<a class="dropdown-item" href=@Url.Content("~/Content/pricing.html")>Coming Soon Page</a>*@
+                                @*@Html.ActionLink("Coming Soon Page", "ComingSoon", "Home", new { @class = "dropdown-item" })*@
+                                <a class="dropdown-item" href="http://acpl.in.net/fm220_entry/RD_Service_Call_HTTP.aspx">RD Service Demo</a>
+                                @Html.ActionLink("Test DB", "TestDB", "Home", new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+    </div>
+
+        @* Carousel Slides *@
+
+        <div>
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container bottom_border">
+                <div class="row">
+                    <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+                        <!--headin5_amrc-->
+                        <p class="mb10">We are based in Vadodara and our branches are spread across various locations throughout the country. Branch information can be found in the contact page</p>
+                        <p>
+                            <i class="fa fa-location-arrow"></i> 504/6 G.I.D.C Industrial Estate, Makarpura, Vadodara, Gujarat, India
+                        </p>
+                        <p><i class="fa fa-phone"></i>+91-7874078565, +91-8141958565</p>
+                        <p><i class="fa fa fa-envelope padding-right"></i><a href="mailto:support@acpl.ind.in">support@acpl.ind.in</a></p>
+
+                    </div>
+
+                    <div class=" col-sm-4 col-md  col-6 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+                        <!--headin5_amrc-->
+                        <ul class="footer_ul_amrc">
+                            <li><a href="http://acpl.in.net/RdService.html?"><i class="fa fa-link padding-right"></i>RD Service documents and app resources</a></li>
+                            <li><a href="http://acpl.in.net/fm220_entry/RD_Service_Call_HTTP.aspx"><i class="fa fa-link padding-right"></i>RD Service Demo (FM220 Windows RD Service)</a></li>
+                            <li><a href="http://acpl.in.net/downloads/ACPL_FM220_Registered_Device_v2.0.0.zip"><i class="fa fa-link padding-right"></i>Android RD Service app with face support (direct download)</a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=com.acpl.registersdk"><i class="fa fa-link padding-right"></i>Android RD Service app (Google Play download)</a></li>
+                            <li><a href="http://acpl.in.net/downloads/SetupFM220_RD_Ver1.zip"><i class="fa fa-link padding-right"></i>Windows certified RD service (STARTEK FM220U)</a></li>
+                            <li><a href="http://acpl.in.net/downloads/Setup_FM220_Support.zip"><i class="fa fa-link padding-right"></i>Windows support tools (STARTEK FM220U)</a></li>
+                        </ul>
+                        <!--footer_ul_amrc ends here-->
+                    </div>
+
+                    <div class=" col-sm-4 col-md  col-6 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Manuals</h5>
+                        <!--headin5_amrc-->
+                        <ul class="footer_ul_amrc">
+                            <li><a href="@Url.Content("~/Content/manuals/RDService_Error_Details.pdf")"><i class="fa fa-file-pdf padding-right"></i>RD Service Response Error Code Manual</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/ACPL FM220 RD Document(FOR DEVELOPER).pdf")"><i class="fa fa-file-pdf padding-right"></i>Android RD Service Programmer Manual</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/ACPL_RD_WIN_PROGRAMMER_MANUAL.pdf")"><i class="fa fa-file-pdf padding-right"></i>Windows RD Service Programmer Manual</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/RD_SERVICE_INTEGRATION _WITH_FACE_AUTHENTICATION.pdf")"><i class="fa fa-file-pdf padding-right"></i>Face Integration Manual (Android/Windows)</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/ACPL_FM220_RD_Document_ANDROID.pdf")"><i class="fa fa-file-pdf padding-right"></i>Android RD Service User Manual</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/Android_HTTPS_Certificate_Setup.pdf")"><i class="fa fa-file-pdf padding-right"></i>Manual to install certificate for RD service HTTPS web call setup in Android</a></li>
+                            <li><a href="@Url.Content("~/Content/manuals/WINDOWS_RD_SERVICE_INSTALLATION_GUIDE.pdf")"><i class="fa fa-file-pdf padding-right"></i>Installation guide for RD Service - Windows platform</a></li>
+                        </ul>
+                        <!--footer_ul_amrc ends here-->
+                    </div>
+
+                    <div class=" col-sm-4 col-md  col-12 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Sample Code</h5>
+                        <!--headin5_amrc ends here-->
+                        <ul class="footer_ul2_amrc">
+                            <li><a href="https://drive.google.com/open?id=0ByO1O2iHh7BedldBeEtrWHZhLUE"><i class="fa fa-code fleft padding-right"></i><p>Android basic demo app for RD Service calls</p></a></li>
+                            <li><a href="https://drive.google.com/open?id=0ByO1O2iHh7BeLUNhZEpsbnllTnc"><i class="fa fa-code fleft padding-right"></i> <p>Android advanced demo App for RD Service Calls(With RD Service detection)</p></a></li>
+                            <li><a href="https://drive.google.com/file/d/0B2oVlLyrp-N2c0xZeUtGNUhDTUU/view?usp=sharing"><i class="fa fa-code fleft padding-right"></i> <p>.Net web sample</p></a></li>
+                            <li><a href="https://drive.google.com/file/d/0B2oVlLyrp-N2VXVyeUFsOGhJWm8/view?usp=sharing"><i class="fa fa-code fleft padding-right"></i> <p>.Net C# Sample</p></a></li>
+                            <li><a href="https://drive.google.com/file/d/0B2oVlLyrp-N2T05STkpZTU52c00/view?usp=sharing"><i class="fa fa-code fleft padding-right"></i> <p>Java sample</p></a></li>
+                        </ul>
+                        <!--footer_ul2_amrc ends here-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <ul class="foote_bottom_ul_amrc">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Pricing", "PricingPage", "Home")</li>
+                    <li>@Html.ActionLink("Contact","Contact","Home")</li>
+                    <li><a href="http://acpl.in.net/privacypolicy.htm">Privacy Policy</a></li>
+                </ul>
+                <!--foote_bottom_ul_amrc ends here-->
+                <p class="text-center">Copyright &copy;2018 | Designed by <a href="https://www.linkedin.com/in/rongon-chatterjee-9a2305a3/">Rongon Chatterjee</a> at <a href="http://accesscomputech.com/">Access Computech Pvt. Ltd.</a></p>
+                <ul class="social_footer_ul">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/access-computech-pvt.-ltd.-/"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+                <!--social_footer_ul ends here-->
+            </div>
+
+            <!-- /.container -->
+        </footer>
+        
+
+        @*<hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+    
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
+</body>
+</html>

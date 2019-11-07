@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<h2>Content goes here</h2>*@
+@*<head>
+    <link rel="title icon" href="acpl_logo.png" />
+</head>*@
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div id ="Carousel_2" class="carousel-item active">
+                <div class="carousel-caption d-none d-md-block" style="color:white">
+                    <h3>Expert in biometrics</h3>
+                    <p>Robust biometric solutions simplified</p>
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div id ="Carousel_1" class="carousel-item">
+                <div class="carousel-caption d-none d-md-block" style="color:white">
+                    <h3>Manage your office better</h3>
+                    <p>Tailor made security and attendance control systems</p>
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div id="Carousel_3" class="carousel-item">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>Thoroughly tested and certified applications</h3>
+                    <p>STQC certified Aadhaar RD Service as per latest UIDAI standards</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+<!-- Page Content -->
+<div class="container">
+    @*<h2 class="my-4">
+        Product Showcase
+    </h2>*@
+    <!-- Marketing Icons Section -->
+    @*<div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">Card Title</h4>
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">Card Title</h4>
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">Card Title</h4>
+                <div class="card-body">
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <!-- /.row -->
+    <!-- Portfolio Section -->
+    <h2 class="my-4">
+        What we offer
+    </h2>
+    <div class="row">
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <div class="custom-container">
+                    <img class="card-img-top custom-image" src=@Url.Content("~/Content/images/FM220U_Org.jpg") alt="Product 1">
+                    <a href="~/Home/PricingPage?Length=4">
+                        <div class="custom-middle">
+                            <div class="custom-text">
+                                @*@Html.ActionLink("Buy Device", "ComingSoon", "Home", new { @style = "text-decoration:none; color:#ffffff" })*@
+                                Buy Device
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        @*<a href="#">FM220U</a>*@
+                        @Html.ActionLink("FM220U Device", "FM220UProdPage", "Home")
+                    </h4>
+                    <p class="card-text">
+                        FM220U Registred Device for Aadhaar Authentication. Buy with our STQC certified RD service for seamless integration.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <div class="custom-container">
+                    <img class="card-img-top custom-image" src=@Url.Content("~/Content/images/prod5_test.jpg") alt="Prodcut 2">
+                    <a href="~/Home/PricingPage?Length=4">
+                        <div class="custom-middle">
+                            <div class="custom-text">
+                                @*@Html.ActionLink("Buy RD Service", "PricingPage", "Home", new { @style = "text-decoration:none; color:#ffffff" })*@
+                                Buy RD Service
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        @*<a href="#">Aadhaar RD Service</a>*@
+                        @Html.ActionLink("Aadhaar RD Service", "RDSProdPage", "Home", new {  })
+                    </h4>
+                    <p class="card-text">STQC (Standardisation Testing and Quality Certification) certified Aadhaar Registered Device service will enable your organisation to perform foolproof authentication and <br />e-KYC. Available for finger and iris devices.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <div class="custom-container">
+                    <img class="card-img-top custom-image" src=@Url.Content("~/Content/images/support2.png") alt="Product 3">
+                    <a href="~/Home/PricingPage?Length=4">
+                        <div class="custom-middle">
+                            <div class="custom-text">
+                                @*  @Html.ActionLink("Buy RD Service", "PricingPage", "Home", new { @style = "text-decoration:none; color:#ffffff" })*@
+                                Buy Extended Support
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        @*<a href="#">IriShield MK-2120U</a>*@
+                        @Html.ActionLink("Extended Support", "SupportProdPage", "Home", new { @style = "text-decoration:none" })
+                    </h4>
+                    <p class="card-text">Avail the exlusive benefits of our dedicated in house support team. This package also brings along with itself an extended waranty for your devices.</p>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="Product 4"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Four</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="Product 5"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Five</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+            <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="Product 6"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">Project Six</a>
+                    </h4>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
+                </div>
+            </div>
+        </div>*@
+    </div>
+    <!-- /.row -->
+
+    <hr/>
+    <!-- Features Section -->
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Solutions</h2>
+            <p>We provide:</p>
+            <ul>
+                <li>
+                    <strong>STQC certified Aadhaar Registered Device service</strong>
+                </li>
+                <li>Access control systems</li>
+                <li>Biometric authentication device</li>
+                <li>Resource management applications (platform independent)</li>
+            </ul>
+            <p>
+                In-house manufacturing and R&D enable us to provide customised solutions. We deliver user friendly software for all popular platforms and databases. 3000+ satisfied customers, 15000+ recorders and 9 lacs+ FM220U installed all over India.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <img class="img-fluid rounded" src=@Url.Content("~/Content/images/iris750x450_1.jpg") alt="">
+        </div>
+    </div>
+    <!-- /.row -->
+    <hr>
+    <!-- Call to Action Section -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <p>
+                @*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias 4speriores commodi.*@
+                We are based in Vadodara and have our branches spread across various locations throughout the country. Visit our contact page to know more.
+            </p>
+        </div>
+        <div class="col-md-4">
+            @*<a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>*@
+            @Html.ActionLink("Contact Us", "Contact", "Home",new { @class = "btn btn-lg btn-secondary btn-block" })
+            @*@Html.ActionLink("Call to Action", "TestFunction", "Home", new { name = "Rongon" }, null)*@
+        </div>
+    </div>
+</div>
+<!-- /.container -->
